@@ -1,0 +1,29 @@
+
+Needed:
+ - apache2
+ - mod_python
+ - potrace
+
+Apache settings configured in Ubuntu 11.04. The git repo "Vectorize-Gallery" is located under "/home/ubuntu1/".
+The apache needs read and write rights in the folder "/home/ubuntu1/Vectorize-Gallery/tmp"
+
+Adapted config file "/etc/apache2/sites-available/default":
+
+	DocumentRoot /home/ubuntu1/Vectorize-Gallery
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
+
+	<Directory /home/ubuntu1/Vectorize-Gallery>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	<Directory /home/ubuntu1/Vectorize-Gallery/py>
+		SetHandler mod_python 
+		PythonHandler mod_python.publisher
+    PythonDebug On
+	</Directory>
