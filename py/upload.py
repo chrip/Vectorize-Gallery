@@ -33,20 +33,20 @@ def _generate_svg_pathes(image_id):
   #1 scale n: scale the image with factor n
   #2 linear: scale linear (fast) --cubic: scale cubic best results (slow) [l,c]
   #3 threshold [0 .. 1]: the threshold grey value for bilevel conversion
-  #4 invert: invert the image [y,n]
+  #4 invert: invert the image [yes,no]
 
   # potrace
   #5 turnpolicy [black, white, right, left, minority, majority, or random]
   #6 turdsize n: suppress speckles of up to this many pixels
   #7 alphamax n: how smooth the result is [-1 .. 1.334] default 1
   #8 color #rrggbb: foreground color
-  #9 opaque background [y,n]
+  #9 opaque background [yes,no]
   #10 fillcolor #rrggbb: background color
 
   all_pathes = []
   all_thresholds = range(42,60,2)
   for t in all_thresholds:
-    all_pathes.append('{0:s}/4-2-l-{1:d}-n-black-5-1-000000-n-FFFFFF.svg'.format(image_id, t))
+    all_pathes.append('{0:s}.svg?highpass_filter=4&scale_factor=2&scale_method=linear&threshold=0.{1:d}&invert=no&turnpolicy=black&turdsize=5&alphamax=1&foreground_color=000000&opaque_background=no&background_color=FFFFFF'.format(image_id, t))
   return all_pathes
 
 def _get_img_tag(src, size):
