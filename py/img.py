@@ -1,12 +1,12 @@
 from mod_python import apache
+from mod_python import Session
+from mod_python import util
 import subprocess
-
-tmp_dir = '/home/ubuntu1/Vectorize-Gallery/tmp/'
 
 def index(req, img = None):
   return 'index'
 
-def img(req, **params):
+def vectorGraphic(req, **params):
 #  import rpdb2; rpdb2.start_embedded_debugger('password')
   
   #### mkbitmap
@@ -46,14 +46,16 @@ def img(req, **params):
     potrace_commands.append('--fillcolor')
     potrace_commands.append('#' + params.get('background_color', 'FFFFFF'))
 
-  cat_output = subprocess.Popen(['cat', tmp_dir + params.get('session_id') + '.bmp'], stdout=subprocess.PIPE)
-  mkbitmap_output = subprocess.Popen(mkbitmap_commands, stdin=cat_output.stdout, stdout=subprocess.PIPE)
-  potrace_output = subprocess.Popen(potrace_commands, stdin=mkbitmap_output.stdout, stdout=subprocess.PIPE)
-  cat_output.stdout.close()  # Allow p1 to receive a SIGPIPE if p2 exits.
-  mkbitmap_output.stdout.close()  # Allow p2 to receive a SIGPIPE if p3 exits.
-  svg_image = potrace_output.communicate()[0]
+  session = Session.Session(req)
+  if session.is_new():
+    util.redirect(req, '/error_page.html')
 
+  mkbitmap = subprocess.Popen(mkbitmap_commands, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+  bitmap_image = mkbitmap.communicate(input=session.get('raw_image').getvalue())[0]
+  potrace = subprocess.Popen(potrace_commands, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+  svg_image = potrace.communicate(input=bitmap_image)[0]
+  
   req.content_type = 'image/svg+xml'
   req.write(svg_image)
-  return #params.get('session_id'), 'mkbitmap', '--filter', highpass_filter, '--scale', scale_factor, scale_method, '--threshold', threshold, invert, 'potrace', '--turnpolicy', turnpolicy, '--turdsize', turdsize, '--svg', '--alphamax', alphamax, '--color', foreground_color, opaque_background, '--fillcolor', background_color
+  return
 

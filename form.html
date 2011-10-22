@@ -1,0 +1,137 @@
+<!doctype html> 
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Vectorize Settings</title>
+  </head>
+  <body>
+  <h1>Edit settings</h1>
+  <form name="upload" action="py/img/vectorGraphic" method="get" id="upload">
+      <table>
+        <tr>
+          <td>highpass_filter</td>
+
+          <td><input type="text" name="highpass_filter" value="4" /></td>
+        </tr>
+
+        <tr>
+          <td>scale_factor</td>
+
+          <td><input type="text" name="scale_factor" value="2" /></td>
+        </tr>
+
+        <tr>
+          <td>scale_method</td>
+
+          <td><select name="scale_method">
+            <option>
+              linear
+            </option>
+
+            <option selected="selected">
+              cubic
+            </option>
+          </select></td>
+        </tr>
+
+        <tr>
+          <td>threshold</td>
+
+          <td><input type="text" name="threshold" value="0.5" /></td>
+        </tr>
+
+        <tr>
+          <td>invert</td>
+
+          <td><select name="invert">
+            <option>
+              yes
+            </option>
+
+            <option selected="selected">
+              no
+            </option>
+          </select></td>
+        </tr>
+
+        <tr>
+          <td>turnpolicy</td>
+
+          <td><select name="turnpolicy">
+            <option>
+              black
+            </option>
+
+            <option>
+              white
+            </option>
+
+            <option>
+              right
+            </option>
+
+            <option>
+              left
+            </option>
+
+            <option selected="selected">
+              minority
+            </option>
+
+            <option>
+              majority
+            </option>
+
+            <option>
+              random
+            </option>
+          </select></td>
+        </tr>
+
+        <tr>
+          <td>turdsize</td>
+
+          <td><input type="text" name="turdsize" value="5" /></td>
+        </tr>
+
+        <tr>
+          <td>alphamax</td>
+
+          <td><input type="text" name="alphamax" value="1" /></td>
+        </tr>
+
+        <tr>
+          <td>foreground_color</td>
+
+          <td><input type="text" name="foreground_color" value="000000" /></td>
+        </tr>
+
+        <tr>
+          <td>opaque_background</td>
+
+          <td><select name="opaque_background">
+            <option>
+              yes
+            </option>
+
+            <option selected="selected">
+              no
+            </option>
+          </select></td>
+        </tr>
+
+        <tr>
+          <td>background_color</td>
+
+          <td><input type="text" name="background_color" value="FFFFFF" /></td>
+        </tr>
+
+        <tr>
+          <td><input type="submit" value="Show image" /></td>
+
+          <td></td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

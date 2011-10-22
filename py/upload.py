@@ -5,13 +5,13 @@ import Image
 import subprocess
 import urllib
 import os
+import StringIO
 
-absolut_image_path = '/home/ubuntu1/Vectorize-Gallery/tmp/'
-max_image_size = (250,250)
+
+max_image_size = 400
 
 def result(req, img = None):
-  session = Session.Session(req)
-  session.save()
+  session = Session.Session(req)  
   try:
     image = Image.open(img.file)
     image_type = image.format
@@ -20,14 +20,16 @@ def result(req, img = None):
   if image_type != 'JPEG' and image_type != 'PNG' and image_type != 'BMP':
     util.redirect(req, '/error_page.html')
   else:    
-    image.thumbnail(max_image_size)
-    image_id = session.id()    
-    image.save('{0:s}{1:s}.bmp'.format(absolut_image_path, image_id), 'BMP')
-    all_pathes = _generate_svg_pathes(image_id)
+    image.thumbnail((max_image_size,max_image_size))
+    raw_image = StringIO.StringIO()
+    image.save(raw_image, 'BMP')
+    session['raw_image'] = raw_image
+    session.save()
+    all_pathes = _generate_svg_pathes()
     return _get_html_page(all_pathes, image.size)
 
 
-def _generate_svg_pathes(image_id):  
+def _generate_svg_pathes():  
   # mkbitmap
   #0 filter n: highpass filter
   #1 scale n: scale the image with factor n
@@ -46,11 +48,11 @@ def _generate_svg_pathes(image_id):
   all_pathes = []
   all_thresholds = range(42,60,2)
   for t in all_thresholds:
-    all_pathes.append('{0:s}.svg?highpass_filter=4&scale_factor=2&scale_method=linear&threshold=0.{1:d}&invert=no&turnpolicy=black&turdsize=5&alphamax=1&foreground_color=000000&opaque_background=no&background_color=FFFFFF'.format(image_id, t))
+    all_pathes.append('/py/img/vectorGraphic?highpass_filter=4&scale_factor=2&scale_method=cubic&threshold=0.{0:d}&invert=no&turnpolicy=black&turdsize=5&alphamax=1&foreground_color=000000&opaque_background=no&background_color=FFFFFF'.format(t))
   return all_pathes
 
 def _get_img_tag(src, size):
-  return '<img src="/img/{0:s}" width="{1[0]:d}" height="{1[1]:d}" />'.format(src, size)
+  return '<img src="{0:s}" width="{1[0]:d}" height="{1[1]:d}" />'.format(src, size)
 
 def _get_html_page(all_pathes, size):
   html = '<!doctype html><html><head><meta charset=utf-8><title>Vectorize</title></head><body>'

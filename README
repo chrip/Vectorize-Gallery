@@ -2,11 +2,9 @@
 Needed:
  - apache2
  - mod_python
- - mod_rewrite
  - potrace
 
 Apache settings configured in Ubuntu 11.04. The git repo "Vectorize-Gallery" is located under "/home/ubuntu1/".
-The apache needs read and write rights in the folder "/home/ubuntu1/Vectorize-Gallery/tmp"
 
 Adapted config file "/etc/apache2/sites-available/default":
 
@@ -20,8 +18,6 @@ Adapted config file "/etc/apache2/sites-available/default":
 	<Directory /home/ubuntu1/Vectorize-Gallery/py>
 		SetHandler mod_python 
 		PythonHandler mod_python.publisher
-                PythonDebug On		
+    PythonDebug On		
 	</Directory>
 
-  RewriteEngine on
-  RewriteRule ^/img/(.*)/(.*)\.svg$ /py/img.py/img?session_id=$1&image_id=$2
