@@ -3,14 +3,13 @@ from mod_python import Session
 from mod_python import util
 import Image
 import subprocess
-import urllib
 import os
 import StringIO
 
 
 max_image_size = 400
 
-def result(req, img = None):
+def index(req, img = None):
   session = Session.Session(req)  
   try:
     image = Image.open(img.file)
@@ -19,7 +18,12 @@ def result(req, img = None):
     util.redirect(req, '/error_page.html')
   if image_type != 'JPEG' and image_type != 'PNG' and image_type != 'BMP':
     util.redirect(req, '/error_page.html')
-  else:    
+  else:
+    # prevent IOError: cannot write mode RGBA as BMP
+    image.load()
+    if len(image.split()) == 4:      
+      r, g, b, a = image.split()
+      image = Image.merge("RGB", (r, g, b))
     image.thumbnail((max_image_size,max_image_size))
     raw_image = StringIO.StringIO()
     image.save(raw_image, 'BMP')
@@ -55,9 +59,10 @@ def _get_img_tag(src, size):
   return '<img src="{0:s}" width="{1[0]:d}" height="{1[1]:d}" />'.format(src, size)
 
 def _get_html_page(all_pathes, size):
-  html = '<!doctype html><html><head><meta charset=utf-8><title>Vectorize</title></head><body>'
+  html = ''
   for img in all_pathes:
     html += _get_img_tag(img, size)
-  html += '</body></html>'
+  html += ''
   return html
+
 

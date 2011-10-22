@@ -1,14 +1,44 @@
-<!doctype html> 
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset=utf-8>
-    <title>Upload</title>
-  </head>
-  <body>
-  <h1>Upload your image</h1>
-  <form name="upload" action="py/upload/result" method="post" enctype="multipart/form-data">
-    <input type="file" name="img"/>
-    <input type="submit" value="Upload"/>
-  </form>
-  </body>
+<head><title>
+	Image Upload
+</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/upload.js"></script>
+</head>
+<body>
+<form id="form1" enctype="multipart/form-data" method="post" action="py/upload">
+  <div class="row">
+    <label for="img">Select a File to Upload</label><br />
+
+    <input type="file" name="img" id="img" onchange="fileSelected();"/>  
+  </div>
+  <div class="row">
+  <input type="button" onclick="uploadFile()" value="Upload" />
+  </div>
+  <div id="fileInfo">
+    <div id="fileName"></div>
+    <div id="fileSize"></div>
+    <div id="fileType"></div>
+
+  </div>
+  <div class="row"></div>
+  <div id="progressIndicator">
+    <div id="progressBar" class="floatLeft">
+    </div>
+    <div id="progressNumber" class="floatRight">&nbsp;</div>
+    <div class="clear"></div>
+    <div>
+      <div id="transferSpeedInfo" class="floatLeft" style="width: 80px;">&nbsp;</div>
+
+      <div id="timeRemainingInfo" class="floatLeft" style="margin-left: 10px;">&nbsp;</div>
+      <div id="transferBytesInfo" class="floatRight" style="text-align: right;">&nbsp;</div>
+      <div class="clear"></div>
+    </div>    
+    <div id="uploadResponse"></div>
+  </div>  
+</form>
+
+</body>
 </html>
+
