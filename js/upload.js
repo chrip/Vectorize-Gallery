@@ -1,4 +1,4 @@
-/** author: Shiv Kumar 
+/** based on code by Shiv Kumar 
     http://www.matlus.com/html5-file-upload-with-progress/
 */
 var bytesUploaded = 0;
@@ -27,13 +27,8 @@ function uploadFile() {
   progressBar.style.display = 'block';
   progressBar.style.width = '0px';        
   
-  /* If you want to upload only a file along with arbitary data that
-     is not in the form, use this */
   var fd = new FormData();
   fd.append("img", document.getElementById('img').files[0]);
-
-  /* If you want to simply post the entire form, use this */
-  //var fd = document.getElementById('form1').getFormData();
   
   var xhr = new XMLHttpRequest();        
   xhr.upload.addEventListener("progress", uploadProgress, false);
@@ -90,7 +85,7 @@ function uploadProgress(evt) {
     document.getElementById('progressBar').style.width = (percentComplete * 3.55).toString() + 'px';
     document.getElementById('transferBytesInfo').innerHTML = bytesTransfered;
     if (percentComplete == 100) {
-      document.getElementById('progressInfo').style.display = 'none';
+      //document.getElementById('progressIndicator').style.display = 'none';
       var uploadResponse = document.getElementById('uploadResponse');
       uploadResponse.innerHTML = '<span style="font-size: 18pt; font-weight: bold;">Please wait...</span>';
       uploadResponse.style.display = 'block';
@@ -103,6 +98,7 @@ function uploadProgress(evt) {
 
 function uploadComplete(evt) {
   clearInterval(intervalTimer);
+  uploadProgress(evt);
   var uploadResponse = document.getElementById('uploadResponse');
   uploadResponse.innerHTML = evt.target.responseText;
   uploadResponse.style.display = 'block';
