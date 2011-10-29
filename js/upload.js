@@ -13,7 +13,7 @@ function fileSelected() {
     fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
   else
     fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
-  document.getElementById('fileInfo').style.display = 'block';
+  document.getElementById('step2').style.display = 'block';
   document.getElementById('fileName').innerHTML = 'Name: ' + file.name;
   document.getElementById('fileSize').innerHTML = 'Size: ' + fileSize;
   document.getElementById('fileType').innerHTML = 'Type: ' + file.type;
@@ -21,6 +21,7 @@ function fileSelected() {
 
 function uploadFile() {
   previousBytesLoaded = 0;
+  document.getElementById('step3').style.display = 'block';
   document.getElementById('uploadResponse').style.display = 'none';
   document.getElementById('progressNumber').innerHTML = '';
   var progressBar = document.getElementById('progressBar');
@@ -84,33 +85,28 @@ function uploadProgress(evt) {
     document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
     document.getElementById('progressBar').style.width = (percentComplete * 3.55).toString() + 'px';
     document.getElementById('transferBytesInfo').innerHTML = bytesTransfered;
-    if (percentComplete == 100) {
-      //document.getElementById('progressIndicator').style.display = 'none';
-      var uploadResponse = document.getElementById('uploadResponse');
-      uploadResponse.innerHTML = '<span style="font-size: 18pt; font-weight: bold;">Please wait...</span>';
-      uploadResponse.style.display = 'block';
-    }
   }
   else {
-    document.getElementById('progressBar').innerHTML = 'unable to compute';
+    document.getElementById('progressBar').innerHTML = 'unable to compute progress';
   }  
 }
 
 function uploadComplete(evt) {
   clearInterval(intervalTimer);
-  uploadProgress(evt);
-  var uploadResponse = document.getElementById('uploadResponse');
-  uploadResponse.innerHTML = evt.target.responseText;
-  uploadResponse.style.display = 'block';
+  window.location = "form.html";
 }  
 
 function uploadFailed(evt) {
   clearInterval(intervalTimer);
-  alert("An error occurred while uploading the file.");  
+  document.getElementById('uploadResponse');
+  uploadResponse.innerHTML = "An error occurred while uploading the file.";
+  uploadResponse.style.display = 'block';
 }  
 
 function uploadCanceled(evt) {
   clearInterval(intervalTimer);
-  alert("The upload has been canceled by the user or the browser dropped the connection.");  
+  document.getElementById('uploadResponse');
+  uploadResponse.innerHTML = "The upload has been canceled by the user or the browser dropped the connection.";
+  uploadResponse.style.display = 'block';
 }  
 

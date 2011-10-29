@@ -3,59 +3,52 @@
   <head>
     <meta charset=utf-8>
     <title>Vectorize Settings</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/settings.js"></script>
   </head>
   <body>
-  <h1>Edit settings</h1>
+ 
   <form name="upload" action="py/img/vectorGraphic" method="get" id="upload">
+      <h1>Edit settings</h1>
       <table>
         <tr>
-          <td>highpass_filter</td>
+          <td>Highpass filter</td>
 
           <td><input type="text" name="highpass_filter" value="4" /></td>
         </tr>
 
         <tr>
-          <td>scale_factor</td>
+          <td>Scale factor</td>
 
           <td><input type="text" name="scale_factor" value="2" /></td>
         </tr>
 
         <tr>
-          <td>scale_method</td>
+          <td>Scale method</td>
 
-          <td><select name="scale_method">
-            <option>
-              linear
-            </option>
-
-            <option selected="selected">
-              cubic
-            </option>
-          </select></td>
+          <td>
+              <input type="radio" name="scale_method" value="cubic" checked="checked" />&nbsp;cubic&nbsp;
+              <input type="radio" name="scale_method" value="linear" />&nbsp;linear
+          </td>
         </tr>
 
         <tr>
-          <td>threshold</td>
+          <td>Threshold</td>
 
           <td><input type="text" name="threshold" value="0.5" /></td>
         </tr>
 
         <tr>
-          <td>invert</td>
+          <td>Invert colors</td>
 
-          <td><select name="invert">
-            <option>
-              yes
-            </option>
-
-            <option selected="selected">
-              no
-            </option>
-          </select></td>
+          <td>
+              <input type="radio" name="invert" value="yes" />&nbsp;yes&nbsp;
+              <input type="radio" name="invert" value="no"  checked="checked"/>&nbsp;no
+          </td>
         </tr>
 
         <tr>
-          <td>turnpolicy</td>
+          <td>Turnpolicy</td>
 
           <td><select name="turnpolicy">
             <option>
@@ -89,39 +82,34 @@
         </tr>
 
         <tr>
-          <td>turdsize</td>
+          <td>Turdsize</td>
 
           <td><input type="text" name="turdsize" value="5" /></td>
         </tr>
 
         <tr>
-          <td>alphamax</td>
+          <td>Alphamax</td>
 
           <td><input type="text" name="alphamax" value="1" /></td>
         </tr>
 
         <tr>
-          <td>foreground_color</td>
+          <td>Foreground color</td>
 
           <td><input type="text" name="foreground_color" value="000000" /></td>
         </tr>
 
         <tr>
-          <td>opaque_background</td>
+          <td>Opaque background</td>
 
-          <td><select name="opaque_background">
-            <option>
-              yes
-            </option>
-
-            <option selected="selected">
-              no
-            </option>
-          </select></td>
+          <td>
+              <input type="radio" name="opaque_background" value="yes" />&nbsp;yes&nbsp;
+              <input type="radio" name="opaque_background" value="no"  checked="checked"/>&nbsp;no
+          </td>
         </tr>
 
         <tr>
-          <td>background_color</td>
+          <td>Background color</td>
 
           <td><input type="text" name="background_color" value="FFFFFF" /></td>
         </tr>

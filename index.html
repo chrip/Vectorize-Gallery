@@ -9,34 +9,38 @@
 <body>
 <form id="form1" enctype="multipart/form-data" method="post" action="py/upload">
   <div class="row">
-    <label for="img">Select a File to Upload</label><br />
-
+    <div class="row">
+      <label for="img">Select an image to upload</label>
+    </div>
     <input type="file" name="img" id="img" onchange="fileSelected();"/>  
   </div>
-  <div class="row">
-  <input type="button" onclick="uploadFile()" value="Upload" />
-  </div>
-  <div id="fileInfo">
-    <div id="fileName"></div>
-    <div id="fileSize"></div>
-    <div id="fileType"></div>
-
-  </div>
-  <div class="row"></div>
-  <div id="progressIndicator">
-    <div id="progressBar" class="floatLeft">
+  <div id="step2" style="display:none;">
+    <div id="fileInfo" >
+      <div id="fileName"></div>
+      <div id="fileSize"></div>
+      <div id="fileType"></div>
     </div>
-    <div id="progressNumber" class="floatRight">&nbsp;</div>
-    <div class="clear"></div>
-    <div>
-      <div id="transferSpeedInfo" class="floatLeft" style="width: 80px;">&nbsp;</div>
+    <div class="row"></div>
+    <div class="row">
+      <input type="button" onclick="uploadFile()" value="Upload" />
+    </div>
+    <div id="step3" style="display:none;">
+      <div class="row"></div>
+      <div id="progressIndicator">
+        <div id="progressBar" class="floatLeft"></div>      
+        <div id="progressNumber" class="floatRight">&nbsp;</div>
+        <div class="clear"></div>
+        <div>
+          <div id="transferSpeedInfo" class="floatLeft" style="width: 80px;">&nbsp;</div>
 
-      <div id="timeRemainingInfo" class="floatLeft" style="margin-left: 10px;">&nbsp;</div>
-      <div id="transferBytesInfo" class="floatRight" style="text-align: right;">&nbsp;</div>
-      <div class="clear"></div>
-    </div>    
-    <div id="uploadResponse"></div>
-  </div>  
+          <div id="timeRemainingInfo" class="floatLeft" style="margin-left: 10px;">&nbsp;</div>
+          <div id="transferBytesInfo" class="floatRight" style="text-align: right;">&nbsp;</div>
+          <div class="clear"></div>
+        </div>    
+        <div id="uploadResponse"></div>
+       </div>
+    </div>
+  </div>
 </form>
 
 </body>

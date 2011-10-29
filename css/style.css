@@ -79,6 +79,9 @@ input:focus {
   border: 1px solid #ccc;		  
   box-shadow: 0 0 5px #ccc;
   background-image: -moz-linear-gradient(top, #ff9900, #c77801);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ff9900), to(#c77801));	
-  text-align: center;	  
-}		  
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ff9900), to(#c77801));	 
+}		
+
+td {
+  padding:4px;
+}  
