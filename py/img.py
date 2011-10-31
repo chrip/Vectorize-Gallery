@@ -2,9 +2,27 @@ from mod_python import apache
 from mod_python import Session
 from mod_python import util
 import subprocess
+import gzip
+import cStringIO
+import string
 
-def index(req, img = None):
-  return 'index'
+
+def compressBuf(buf):
+  zbuf = cStringIO.StringIO()
+  zfile = gzip.GzipFile(mode = 'wb',  fileobj = zbuf)
+  zfile.write(buf)
+  zfile.close()  
+  return zbuf.getvalue()
+
+def testAcceptsGzip(req):
+  if req.headers_in.has_key('accept-encoding'):
+    encodings = req.headers_in['accept-encoding']
+    req.headers_out['Content-Encoding'] = 'gzip'
+    return (string.find(encodings, "gzip") != -1)
+  else:
+    return 0
+
+
 
 def vectorGraphic(req, **params):
 #  import rpdb2; rpdb2.start_embedded_debugger('password')
@@ -56,6 +74,12 @@ def vectorGraphic(req, **params):
   svg_image = potrace.communicate(input=bitmap_image)[0]
   
   req.content_type = 'image/svg+xml'
-  req.write(svg_image)
+
+  if testAcceptsGzip(req):
+    zbuf = compressBuf(svg_image)    
+    req.headers_out['Content-Length'] = '%d' % (len(zbuf))
+    req.write(zbuf)
+  else:
+    req.write(svg_image)
   return
 

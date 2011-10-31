@@ -22,14 +22,10 @@ form {
 }
 
 input {			
-  border:1px solid #ccc;
-  font-size: 13pt;			
-  padding: 5px 10px 5px 10px;			
-  border-radius:10px;
-  -moz-border-radius: 10px;			
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-	transition: all 0.5s ease-in-out;		
+  border:1px solid #ccc;	
+  padding: 2px 5px;			
+  border-radius:8px;
+  -moz-border-radius: 8px;
 }
 
 input[type=button] {
@@ -37,15 +33,14 @@ input[type=button] {
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#dfdfdf));
 }  				  
 
+input[type=number], input[type=text], select {
+  width:100px;
+}  	
 
 input:focus {
   -webkit-box-shadow:0 0 10px #ccc;
   -moz-box-shadow: 0 0 10px #ccc;
-  box-shadow: 0 0 5px #ccc;
-
-  -webkit-transform: scale(1.05);
-  -moz-transform: scale(1.05);
-  transform: scale(1.05);			
+  box-shadow: 0 0 5px #ccc;	
 }
 
 #img { width: 378px; }
@@ -63,8 +58,8 @@ input:focus {
   height: 14px;
   border: 1px solid #cccccc;
   display: none;
-  border-radius:10px;
-  -moz-border-radius: 10px;		  
+  border-radius:8px;
+  -moz-border-radius: 8px;		  
   background-image: -moz-linear-gradient(top, #66cc00, #4b9500);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#66cc00), to(#4b9500));		  
 }
@@ -84,4 +79,9 @@ input:focus {
 
 td {
   padding:4px;
+  width:140px;
 }  
+
+#settings {
+  width: 300px;
+}

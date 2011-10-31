@@ -8,19 +8,19 @@
   </head>
   <body>
  
-  <form name="upload" action="py/img/vectorGraphic" method="get" id="upload">
+  <form action="py/img/vectorGraphic" method="get" id="settings">
       <h1>Edit settings</h1>
       <table>
         <tr>
           <td>Highpass filter</td>
 
-          <td><input type="text" name="highpass_filter" value="4" /></td>
+          <td><input type="number" name="highpass_filter" value="4" /></td>
         </tr>
 
         <tr>
           <td>Scale factor</td>
 
-          <td><input type="text" name="scale_factor" value="2" /></td>
+          <td><input type="number" name="scale_factor" value="2" /></td>
         </tr>
 
         <tr>
@@ -35,7 +35,7 @@
         <tr>
           <td>Threshold</td>
 
-          <td><input type="text" name="threshold" value="0.5" /></td>
+          <td><input type="number" name="threshold" value="0.5" /></td>
         </tr>
 
         <tr>
@@ -84,13 +84,13 @@
         <tr>
           <td>Turdsize</td>
 
-          <td><input type="text" name="turdsize" value="5" /></td>
+          <td><input type="number" name="turdsize" value="5" /></td>
         </tr>
 
         <tr>
           <td>Alphamax</td>
 
-          <td><input type="text" name="alphamax" value="1" /></td>
+          <td><input type="number" name="alphamax" value="1" /></td>
         </tr>
 
         <tr>
