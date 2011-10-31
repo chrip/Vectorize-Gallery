@@ -39,7 +39,7 @@ function uploadFile() {
   xhr.open("POST", "py/upload");
   xhr.send(fd);
 
-  intervalTimer = setInterval(updateTransferSpeed, 500);
+  intervalTimer = setInterval(updateTransferSpeed, 1000);
 }
 
 function updateTransferSpeed() {
@@ -93,20 +93,27 @@ function uploadProgress(evt) {
 
 function uploadComplete(evt) {
   clearInterval(intervalTimer);
-  window.location = "form.html";
+  if(evt.target.responseText !== 'OK') {
+    setErrorText(evt.target.responseText);
+  }
+  else {
+    window.location = "form.html";
+  }
 }  
 
 function uploadFailed(evt) {
   clearInterval(intervalTimer);
-  document.getElementById('uploadResponse');
-  uploadResponse.innerHTML = "An error occurred while uploading the file.";
-  uploadResponse.style.display = 'block';
+  setErrorText("An error occurred while uploading the file.");
 }  
 
 function uploadCanceled(evt) {
   clearInterval(intervalTimer);
-  document.getElementById('uploadResponse');
-  uploadResponse.innerHTML = "The upload has been canceled by the user or the browser dropped the connection.";
-  uploadResponse.style.display = 'block';
-}  
+  setErrorText("The upload has been canceled by the user or the browser dropped the connection.");
+}
+
+function setErrorText(text) {
+  var div = document.getElementById('uploadResponse');  
+  div.innerHTML = text + '<br /><a href="/">try again</a>';
+  div.style.display = 'block';
+}
 

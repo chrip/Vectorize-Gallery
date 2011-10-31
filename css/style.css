@@ -6,7 +6,7 @@ div.row { margin-bottom: 10px; }
 .floatRight { float: right; }
 .clear { clear: both; }
 
-form {
+form, #preview {
   padding: 20px;
   border: 1px solid #cccccc;
   border-radius:10px;
@@ -14,9 +14,8 @@ form {
   -webkit-box-shadow:0 0 10px #ccc;
   -moz-box-shadow: 0 0 10px #ccc;
   box-shadow: 0 0 10px #ccc;
-
   width: 400px;
-  margin: 20px auto;		  
+  margin: 20px;		  
   background-image: -moz-linear-gradient(top, #ffffff,#f2f2f2);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f2f2f2));			
 }
@@ -82,6 +81,12 @@ td {
   width:140px;
 }  
 
-#settings {
+#settings form {
   width: 300px;
+  height:450px;
 }
+
+#preview {
+  height:450px;
+}
+

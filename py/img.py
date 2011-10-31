@@ -22,12 +22,16 @@ def testAcceptsGzip(req):
   else:
     return 0
 
-
-
 def vectorGraphic(req, **params):
 #  import rpdb2; rpdb2.start_embedded_debugger('password')
   
   #### mkbitmap
+  # filter n: highpass filter
+  # scale n: scale the image with factor n
+  # linear: scale linear (fast) - cubic: scale cubic best results (slow) [linear,cubic]
+  # threshold [0 .. 1]: the threshold grey value for bilevel conversion
+  # invert: invert the image [yes,no]
+
   mkbitmap_commands = ['mkbitmap']
 
   mkbitmap_commands.append('--filter')
@@ -45,6 +49,13 @@ def vectorGraphic(req, **params):
     mkbitmap_commands.append('--invert')
   
   ### potrace
+  # turnpolicy [black, white, right, left, minority, majority, or random]
+  # turdsize n: suppress speckles of up to this many pixels
+  # alphamax n: how smooth the result is [-1 .. 1.334] default 1
+  # color #rrggbb: foreground color
+  # opaque background [yes,no]
+  # fillcolor #rrggbb: background color
+
   potrace_commands = ['potrace', '--svg']
 
   potrace_commands.append('--turnpolicy')
