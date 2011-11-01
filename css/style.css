@@ -27,6 +27,11 @@ input {
   -moz-border-radius: 8px;
 }
 
+#settings input {			
+  border:0 none;	
+  background-color:transparent;
+}
+
 input[type=button] {
   background-image: -moz-linear-gradient(top, #ffffff, #dfdfdf);
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#dfdfdf));
