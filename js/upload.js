@@ -73,7 +73,7 @@ function uploadProgress(evt) {
   if (evt.lengthComputable) {
     bytesUploaded = evt.loaded;
     bytesTotal = evt.total;
-    var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+    var percentComplete = Math.round(evt.loaded * 1000 / evt.total) / 10;
     var bytesTransfered = '';
     if (bytesUploaded > 1024*1024)
       bytesTransfered = (Math.round(bytesUploaded * 100/(1024*1024))/100).toString() + 'MB';
@@ -83,7 +83,7 @@ function uploadProgress(evt) {
       bytesTransfered = (Math.round(bytesUploaded * 100)/100).toString() + 'Bytes';
 
     document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
-    document.getElementById('progressBar').style.width = (percentComplete * 3.55).toString() + 'px';
+    document.getElementById('progressBar').style.width = percentComplete.toString() + '%';
     document.getElementById('transferBytesInfo').innerHTML = bytesTransfered;
   }
   else {
