@@ -9,14 +9,14 @@ Apache settings tested with Ubuntu 11.04. The git repo "Vectorize-Gallery" was c
 
 Adapted config file "/etc/apache2/sites-available/default":
 
-  DocumentRoot /home/ubuntu/Vectorize-Gallery
+DocumentRoot /home/ubuntu/Vectorize-Gallery
 
-	<Directory /home/ubuntu1/Vectorize-Gallery/py>
-		SetHandler mod_python 
-		PythonHandler mod_python.publisher
-    PythonDebug On		
-	</Directory>
-  <Directory /home/ubuntu/Vectorize-Gallery/.git>
-    Deny from all
-  </Directory>
+<Directory /home/ubuntu/Vectorize-Gallery/py>
+  SetHandler mod_python 
+  PythonHandler mod_python.publisher
+  PythonDebug On		
+</Directory>
+<Directory /home/ubuntu/Vectorize-Gallery/.git>
+  Deny from all
+</Directory>
 
