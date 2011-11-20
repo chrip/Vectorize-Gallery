@@ -76,7 +76,7 @@ def vectorGraphic(req, **params):
     potrace_commands.append('#' + params.get('background_color', 'FFFFFF'))
 
   session = Session.Session(req)
-  if session.is_new():
+  if session.is_new() == True:
     util.redirect(req, '/error_page.html')
 
   mkbitmap = subprocess.Popen(mkbitmap_commands, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
@@ -92,5 +92,7 @@ def vectorGraphic(req, **params):
     req.write(zbuf)
   else:
     req.write(svg_image)
+  # extend the session lifetime
+  session.save()
   return
 

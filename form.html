@@ -12,25 +12,29 @@
   <body>
  <div id="settings">
   <form action="py/img/vectorGraphic" method="get"  class="floatLeft" >
-      <h1>Edit settings</h1>
       <table>
-        <tr>
+        <tr class="sep header">
+            <td colspan="2">Edit settings</td>
+        </tr>
+        <tr class="subsep">
           <td>Highpass filter</td>
 
           <td>
             <input type="number" name="highpass_filter" readonly="readonly" value="4" />
           </td>
         </tr>
-        <tr>
-            <td colspan="2"><div id="highpass_filter"></div></td>
+        <tr class="sep">
+            <td colspan="2"><div id="highpass_filter_slider"></div></td>
         </tr>
-        <tr>
+        <tr class="subsep">
           <td>Scale factor</td>
 
-          <td><input type="number" name="scale_factor" value="2" /></td>
+          <td><input type="number" name="scale_factor" value="1" readonly="readonly" /></td>
         </tr>
-
-        <tr>
+        <tr class="sep">
+            <td colspan="2"><div id="scale_factor_slider"></div></td>
+        </tr>
+        <tr class="subsep sep">
           <td>Scale method</td>
 
           <td>
@@ -39,13 +43,15 @@
           </td>
         </tr>
 
-        <tr>
+        <tr class="subsep">
           <td>Threshold</td>
 
-          <td><input type="number" name="threshold" value="0.5" /></td>
+          <td><input type="number" name="threshold" value="0.5" readonly="readonly" /></td>
         </tr>
-
-        <tr>
+        <tr class="sep">
+            <td colspan="2"><div id="threshold_slider"></div></td>
+        </tr>
+        <tr class="subsep sep">
           <td>Invert colors</td>
 
           <td>
@@ -54,7 +60,7 @@
           </td>
         </tr>
 
-        <tr>
+        <tr class="subsep sep">
           <td>Turnpolicy</td>
 
           <td><select name="turnpolicy">
@@ -88,25 +94,38 @@
           </select></td>
         </tr>
 
-        <tr>
+        <tr class="subsep">
           <td>Turdsize</td>
 
-          <td><input type="number" name="turdsize" value="5" /></td>
+          <td><input type="number" name="turdsize" value="5" readonly="readonly" /></td>
         </tr>
-
-        <tr>
+        <tr class="sep">
+            <td colspan="2"><div id="turdsize_slider"></div></td>
+        </tr>
+        <tr class="subsep">
           <td>Alphamax</td>
 
           <td><input type="number" name="alphamax" value="1" /></td>
         </tr>
-
-        <tr>
+        <tr class="sep">
+            <td colspan="2"><div id="alphamax_slider"></div></td>
+        </tr>
+        <tr class="subsep">
           <td>Foreground color</td>
 
           <td><input type="text" name="foreground_color" value="000000" /></td>
         </tr>
-
         <tr>
+            <td colspan="2"><div id="red"></div></td>
+        </tr>
+        <tr>
+            <td colspan="2"><div id="green"></div></td>
+        </tr>
+        <tr class="sep">
+            <td colspan="2"><div id="blue"></div></td>
+        </tr>
+
+        <!--tr class="subsep sep">
           <td>Opaque background</td>
 
           <td>
@@ -115,16 +134,14 @@
           </td>
         </tr>
 
-        <tr>
+        <tr class="subsep sep">
           <td>Background color</td>
 
           <td><input type="text" name="background_color" value="FFFFFF" /></td>
-        </tr>
+        </tr-->
 
-        <tr>
-          <td><input type="submit" value="Show image" /></td>
-
-          <td></td>
+        <tr class="subsep">
+          <td colspan="2"><input type="submit" value="Show SVG image in fullscreen!" /></td>
         </tr>
       </table>
     </form>
