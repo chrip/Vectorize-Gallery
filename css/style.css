@@ -58,6 +58,11 @@ input:focus {
   margin-top: 10px;
 }
 
+#fileInfo .error{
+  color: red;
+  font-weight:bold;
+}
+
 #progressBar {		  
   height: 16px;
   border: 1px solid #cccccc;

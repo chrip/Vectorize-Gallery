@@ -7,29 +7,58 @@ var previousBytesLoaded = 0;
 var intervalTimer = 0;
 
 function fileSelected() {
-  var file = document.getElementById('img').files[0];
+  var file = $('#img')[0].files[0];
+  $('#fileName').html('Name: ' + file.name);
+
   var fileSize = 0;
-  if (file.size > 1024 * 1024)
+  var sizeError = false;
+  if (file.size > 1024 * 1024) {
     fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
-  else
+  }
+  else {
     fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
-  document.getElementById('step2').style.display = 'block';
-  document.getElementById('fileName').innerHTML = 'Name: ' + file.name;
-  document.getElementById('fileSize').innerHTML = 'Size: ' + fileSize;
-  document.getElementById('fileType').innerHTML = 'Type: ' + file.type;
+  }
+  if (file.size > 2 * 1024 * 1024) {
+    sizeError = true;
+    $('#fileSize').addClass('error');
+    fileSize += ' | Max: 2MB';
+  }
+  else {
+    $('#fileSize').removeClass('error');
+  }
+  $('#fileSize').html('Size: ' + fileSize);
+
+  var typeError = false;
+  var fileType = file.type;
+  if(fileType != 'image/jpeg' && fileType != 'image/png' && fileType != 'image/bmp') {
+    typeError = true;
+    $('#fileType').addClass('error');
+    fileType += ' | Only: jpeg, png, bmp';
+  }
+  else {
+    $('#fileType').removeClass('error');
+  }
+  $('#fileType').html('Type: ' + fileType);
+  if(sizeError || typeError) {
+    $('#uploadButton').hide();
+  }
+  else {
+    $('#uploadButton').show();
+  }
+  $('#step2').show();
 }
 
 function uploadFile() {
   previousBytesLoaded = 0;
-  document.getElementById('step3').style.display = 'block';
-  document.getElementById('uploadResponse').style.display = 'none';
-  document.getElementById('progressNumber').innerHTML = '';
-  var progressBar = document.getElementById('progressBar');
-  progressBar.style.display = 'block';
-  progressBar.style.width = '0px';        
+  $('#step3').show();
+  $('#uploadResponse').hide();
+  $('#progressNumber').html('');
+  var progressBar = $('#progressBar');
+  progressBar.show();
+  progressBar.css('width', '0px');        
   
   var fd = new FormData();
-  fd.append("img", document.getElementById('img').files[0]);
+  fd.append("img", $('#img')[0].files[0]);
   
   var xhr = new XMLHttpRequest();        
   xhr.upload.addEventListener("progress", uploadProgress, false);
@@ -58,8 +87,8 @@ function updateTransferSpeed() {
     speed =  (Math.round(bytesDiff * 100/1024)/100).toString() + 'KBps';
   else
     speed = bytesDiff.toString() + 'Bps';
-  document.getElementById('transferSpeedInfo').innerHTML = speed;
-  document.getElementById('timeRemainingInfo').innerHTML = '| ' + secondsToString(secondsRemaining);        
+  $('#transferSpeedInfo').html(speed);
+  $('#timeRemainingInfo').html('| ' + secondsToString(secondsRemaining));        
 }
 
 function secondsToString(seconds) {        
@@ -82,12 +111,12 @@ function uploadProgress(evt) {
     else
       bytesTransfered = (Math.round(bytesUploaded * 100)/100).toString() + 'Bytes';
 
-    document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
-    document.getElementById('progressBar').style.width = percentComplete.toString() + '%';
-    document.getElementById('transferBytesInfo').innerHTML = bytesTransfered;
+    $('#progressNumber').html(percentComplete.toString() + '%');
+    $('#progressBar').css('width', percentComplete.toString() + '%');
+    $('#transferBytesInfo').html(bytesTransfered);
   }
   else {
-    document.getElementById('progressBar').innerHTML = 'unable to compute progress';
+    $('#progressBar').html('unable to compute progress');
   }  
 }
 
@@ -112,8 +141,8 @@ function uploadCanceled(evt) {
 }
 
 function setErrorText(text) {
-  var div = document.getElementById('uploadResponse');  
-  div.innerHTML = text + '<br /><a href="/">try again</a>';
-  div.style.display = 'block';
+  var div = $('#uploadResponse');  
+  div.html(text + '<br /><a href="/">try again</a>');
+  div.show();
 }
 

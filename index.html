@@ -4,6 +4,7 @@
 	Image Upload
 </title>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script type="text/javascript" src="js/upload.js"></script>
 </head>
 <body>
@@ -15,14 +16,16 @@
     <input type="file" name="img" id="img" onchange="fileSelected();"/>  
   </div>
   <div id="step2" style="display:none;">
-    <div id="fileInfo" >
+    <div id="fileInfo">
       <div id="fileName"></div>
       <div id="fileSize"></div>
       <div id="fileType"></div>
     </div>
-    <div class="row"></div>
-    <div class="row">
-      <input type="button" onclick="uploadFile()" value="Upload" />
+    <div id="uploadButton" style="display:none;">
+      <div class="row"></div>
+      <div class="row">
+        <input type="button" onclick="uploadFile()" value="Upload" />
+      </div>
     </div>
     <div id="step3" style="display:none;">
       <div class="row"></div>

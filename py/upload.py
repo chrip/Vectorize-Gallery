@@ -9,7 +9,10 @@ import StringIO
 max_image_size = 400
 
 def index(req, img = None):
-  session = Session.Session(req)  
+  session = Session.Session(req)
+  if req.headers_in.has_key('content-length'):
+    if int(req.headers_in['content-length'])> 2097152:
+      return 'Error: Max file size is 2MB.'     
   try:
     image = Image.open(img.file)
     image_type = image.format
