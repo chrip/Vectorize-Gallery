@@ -1,8 +1,4 @@
 
-Demo page running in the amazon cloud:
-
-http://ec2-46-137-150-110.eu-west-1.compute.amazonaws.com/
-
 To run this code on your own apache you neede:
  - apache2
  - mod_python
